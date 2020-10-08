@@ -15,7 +15,7 @@ if($this->logged_in){
 <nav class="menu clearfix">
     <ul>
         <li><a href="<?echo HOME_URI;?>">Home</a></li>
-        <li><a href="<?echo HOME_URI;?>/associacoes">Associacoes</a></li>
+        <li><a href="<?echo HOME_URI;?>/associacoes/">Associacoes</a></li>
         <li><a href="<?echo HOME_URI;?>/associacoes/adm">Associacoes Adm</a></li>
         <li><a href="<?echo HOME_URI;?>/noticias">Noticias</a></li>
         <li><a href="<?echo HOME_URI;?>/noticias/adm">Noticias Admin</a></li>

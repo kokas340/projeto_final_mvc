@@ -75,7 +75,7 @@ $modelo->sem_limite = false;
     <?
     $lista = $modelo->listar_projetos();
     ?>
-    <h1>Lista de Projetos</h1>
+    <h1>Lista de Associações</h1>
     <table id="tbl-projeto" class="list-table">
         <thead>
             <tr>

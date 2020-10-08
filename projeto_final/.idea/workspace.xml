@@ -18,7 +18,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -40,6 +40,8 @@
       <updated>1602162694111</updated>
       <workItem from="1602162695174" duration="458000" />
       <workItem from="1602163347687" duration="4457000" />
+      <workItem from="1602185228444" duration="2134000" />
+      <workItem from="1602188217954" duration="3371000" />
     </task>
     <servers />
   </component>
@@ -47,9 +49,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="202" key="FileChooserDialogImpl" timestamp="1602166304926">
-      <screen x="0" y="30" width="1536" height="834" />
+    <state x="2606" y="247" key="FileChooserDialogImpl" timestamp="1602186095415">
+      <screen x="1920" y="30" width="1920" height="1050" />
     </state>
+    <state x="2606" y="247" key="FileChooserDialogImpl/0.30.1536.834/1920.30.1920.1050@1920.30.1920.1050" timestamp="1602186095415" />
     <state x="549" y="202" key="FileChooserDialogImpl/0.30.1536.834@0.30.1536.834" timestamp="1602166304926" />
     <state x="604" y="366" key="NewPhpFileDialog" timestamp="1602169675513">
       <screen x="0" y="30" width="1536" height="834" />
