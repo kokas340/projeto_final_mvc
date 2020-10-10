@@ -1,17 +1,4 @@
-<p>ola</p>
-<?php
-//if(!defined('ABSPATH')) exit;
-/*$lista = $modelo->listar_assoc();
-foreach ($lista as $assoc){
-    echo $assoc['nome'].$assoc['telefone'];
-}*/
-?>
-
-
-
-<?if(!defined('ABSPATH')) exit;
-
-?>
+<?if(!defined('ABSPATH')) exit;?>
 
 <div class="wrap">
     <?
@@ -28,8 +15,9 @@ foreach ($lista as $assoc){
         <?
         //verifica se estamos a visualizar um unico projeto
         if(is_numeric(chk_array($modelo->parametros,0))):?>
-            <p>Nome: <?echo $assoc['nome'];?></p>
             <p>Morada: <?echo $assoc['morada'];?></p>
+            <p>Telefone: <?echo $assoc['telefone'];?></p>
+            <p>Numero de contribuinte: <?echo $assoc['numContribuinte'];?></p>
             <?
             $this->prev_page = true;
             if($this->prev_page){

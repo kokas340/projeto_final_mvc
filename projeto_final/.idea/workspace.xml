@@ -18,16 +18,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/socio-register" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\projeto_final\views\socio-register" />
+      <recent name="C:\xampp\htdocs\projeto_final\controllers" />
+      <recent name="C:\xampp\htdocs\projeto_final\models\socio-register" />
+      <recent name="C:\Users\guilh\PhpstormProjects\projeto_final" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\projeto_final\models" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\projeto_final\controllers" />
-      <recent name="C:\Users\guilh\PhpstormProjects\projeto_final" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -42,6 +44,7 @@
       <workItem from="1602163347687" duration="4457000" />
       <workItem from="1602185228444" duration="2134000" />
       <workItem from="1602188217954" duration="3371000" />
+      <workItem from="1602346154034" duration="2468000" />
     </task>
     <servers />
   </component>
