@@ -47,10 +47,11 @@
 
             //Obtém os dados da base de dados
             $fetch_user = $db_check_user->fetch();
-            print_r($fetch_user);
 
             //Configurar o ID do uuser
             $user_id = $fetch_user['idSocio'];
+            print_r($user_id);
+            echo $user_id+"roihpnoitr";
 
             //Precisaremos de uma instância da classe PHPass
             //veja http://www.openwall.com/phpass/
@@ -58,7 +59,6 @@
 
             //Cria o hash da senha
             $password = $password_hash->HashPassword($this->form_data['password']);
-
             //Verifica se as permissóes tem algum valor inválido
             if(preg_match('/[^0-9A-Za-z\,\.\-\_\S]/is',$this->form_data['socio_permissions'])){
                 $this->form_msg = '<p class="form_error"> Use just letters, numbers and a comma for permissions</p>';
@@ -81,7 +81,9 @@
             if(!empty($user_id)){
                 $query = $this->db->update('socios','idSocio',$user_id,array(
                     'password' => $password,
-                    'login' => chk_array($this->form_data, 'user_name'),
+                    'email' => chk_array($this->form_data, 'email'),
+                    'login' => chk_array($this->form_data, 'login'),
+                    'nome' => chk_array($this->form_data,'nome'),
                     'socio_session_id' => md5(time()),
                     'socio_permissions' => $permissions
                     ));
@@ -101,6 +103,7 @@
                 $query = $this->db->insert('socios', array(
                     'login' => chk_array($this->form_data,'login'),
                     'password' => $password,
+                    'email' => chk_array($this->form_data, 'email'),
                     'nome' => chk_array($this->form_data,'nome'),
                     'socio_session_id' => md5(time()),
                     'socio_permissions' => $permissions

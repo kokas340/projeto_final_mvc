@@ -9,7 +9,7 @@
     $modelo->del_user($parametros);
     ?>
 
-    <form method="post" action"">
+    <form method="post" action="">
         <table class="form-table">
         <tr>
             <td>Name: </td>
