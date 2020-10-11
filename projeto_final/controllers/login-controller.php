@@ -22,6 +22,7 @@ class LoginController extends MainController{
 
     public function delete(){
         $this->logout();
+        echo "ola";
         //redireciona para a pagina de login
         $this->goto_login();
     }

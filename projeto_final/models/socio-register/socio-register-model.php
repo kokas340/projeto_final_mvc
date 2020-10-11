@@ -50,8 +50,6 @@
 
             //Configurar o ID do uuser
             $user_id = $fetch_user['idSocio'];
-            print_r($user_id);
-            echo $user_id+"roihpnoitr";
 
             //Precisaremos de uma instância da classe PHPass
             //veja http://www.openwall.com/phpass/
@@ -78,14 +76,15 @@
             $permissions = serialize($permissions);
 
             //Se o ID do user não estiver vazio, atualiza os dados
-            if(!empty($user_id)){
+            if($user_id){
                 $query = $this->db->update('socios','idSocio',$user_id,array(
                     'password' => $password,
                     'email' => chk_array($this->form_data, 'email'),
                     'login' => chk_array($this->form_data, 'login'),
                     'nome' => chk_array($this->form_data,'nome'),
                     'socio_session_id' => md5(time()),
-                    'socio_permissions' => $permissions
+                    'socio_permissions' => $permissions,
+                    'idAssoc' => chk_array($this->form_data,'idAssoc')
                     ));
 
                 //Verifica se a consulta está OK e configura a mensagem
@@ -106,7 +105,8 @@
                     'email' => chk_array($this->form_data, 'email'),
                     'nome' => chk_array($this->form_data,'nome'),
                     'socio_session_id' => md5(time()),
-                    'socio_permissions' => $permissions
+                    'socio_permissions' => $permissions,
+                    'idAssoc' => chk_array($this->form_data,'idAssoc')
                     ));
 
                 //Verifica se a consulta está OK e configura a mensagem
@@ -210,6 +210,21 @@
                 return array();
             }
             //Preenche a tabela com os dados do user
+            return $query->fetchAll();
+        }
+
+
+        public function get_assoc_by_id($id = 0){
+            if($id != 0) $query = $this->db->query('SELECT * FROM associacao WHERE idAssoc = '.$id);
+            if(!empty($query)) {
+                $data = $query->fetch();
+                return $data['nome'];
+            }
+            return "Sem associação";
+        }
+
+        public function get_assoc(){
+            $query = $this->db->query('SELECT * FROM associacao');
             return $query->fetchAll();
         }
     }

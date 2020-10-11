@@ -10,11 +10,11 @@ if($this->logged_in)
     <table class="from-table">
         <tr>
             <td>User</td>
-            <td><input name="userdata[user]"></td>
+            <td><input name="userdata[login]"></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="userdata[user_password]"></td>
+            <td><input type="password" name="userdata[password]"></td>
         </tr>
         <?
         if($this->login_error)

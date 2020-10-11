@@ -70,7 +70,7 @@ class UserLogin {
         extract($userdata);
 
         // Verifica se existe um user e senha
-        if (!isset($user) || !isset($user_password)) {
+        if (!isset($login) || !isset($password)) {
             $this->logged_in = false;
             $this->login_error = null;
 
@@ -83,7 +83,7 @@ class UserLogin {
         // Verifica se o user existe na base de dados
 		//$user vem do formulário login-view.php
         $query = $this->db->query(
-                'SELECT * FROM users WHERE user = ? LIMIT 1', array($user)
+                'SELECT * FROM socios WHERE login = ? LIMIT 1', array($login)
         );
 
         // Verifica a consulta
@@ -99,10 +99,9 @@ class UserLogin {
 
         // Obtém os dados da base de user
         $fetch = $query->fetch(PDO::FETCH_ASSOC);
-
         // Obtém o ID do user e o nome
-        $user_id = (int) $fetch['user_id'];
-        $user_name = $fetch['user'];
+        $user_id = (int) $fetch['idSocio'];
+        $user_name = $fetch['login'];
 
         // Verifica se o ID existe
         if (empty($user_id)) {
@@ -116,10 +115,10 @@ class UserLogin {
         }
 
         // Verifica se a pass enviada pelo user coincide com o hash do BD
-        if ($this->phpass->CheckPassword($user_password, $fetch['user_password'])) {
+        if ($this->phpass->CheckPassword($password, $fetch['password'])) {
 
             // Se for uma sessão, verifica se a sessão coincide com a sessão do BD
-            if (session_id() != $fetch['user_session_id'] && !$post) {
+            if (session_id() != $fetch['socio_session_id'] && !$post) {
                 $this->logged_in = false;
                 $this->login_error = 'Wrong session ID.';
 
@@ -139,19 +138,19 @@ class UserLogin {
                 $_SESSION['userdata'] = $fetch;
 
                 // Atualiza a senha
-                $_SESSION['userdata']['user_password'] = $user_password;
+                $_SESSION['userdata']['password'] = $password;
 
                 // Atualiza o ID da sessão
-                $_SESSION['userdata']['user_session_id'] = $session_id;
+                $_SESSION['userdata']['socio_session_id'] = $session_id;
 
                 // Atualiza o ID da sessão na base de dados
                 $query = $this->db->query(
-                        'UPDATE users SET user_session_id = ? WHERE user_id = ?', array($session_id, $user_id)
+                        'UPDATE socios SET socio_session_id = ? WHERE idSocio = ?', array($session_id, $user_id)
                 );
             }
 
             // Obtém um array com as permissões de user
-            $_SESSION['userdata']['user_permissions'] = unserialize($fetch['user_permissions']);
+            $_SESSION['userdata']['socio_permissions'] = unserialize($fetch['socio_permissions']);
 
             // Configura a propriedade dizendo que o user está logado
             $this->logged_in = true;

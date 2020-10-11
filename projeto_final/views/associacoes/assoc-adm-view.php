@@ -62,7 +62,7 @@ $delete_uri = $adm_uri.'del/';
 
     <!-- Lista os projetos -->
     <?
-    $lista = $modelo->listar_assoc();
+    $lista = $modelo->listar_associacoes();
     ?>
     <h1>Lista de Projetos</h1>
     <table id="tbl-projeto" class="list-table">

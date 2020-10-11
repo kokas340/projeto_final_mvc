@@ -18,18 +18,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mvc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/noticias" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\projeto_final\models" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\projeto_final\views\noticias" />
+      <recent name="C:\xampp\htdocs\projeto_final\models\noticias" />
       <recent name="C:\xampp\htdocs\projeto_final\views\socio-register" />
       <recent name="C:\xampp\htdocs\projeto_final\controllers" />
       <recent name="C:\xampp\htdocs\projeto_final\models\socio-register" />
-      <recent name="C:\Users\guilh\PhpstormProjects\projeto_final" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\projeto_final\models" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -47,6 +48,7 @@
       <workItem from="1602346154034" duration="2742000" />
       <workItem from="1602350080352" duration="17000" />
       <workItem from="1602350101131" duration="6967000" />
+      <workItem from="1602417205957" duration="14786000" />
     </task>
     <servers />
   </component>
@@ -54,15 +56,16 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="686" y="247" key="FileChooserDialogImpl" timestamp="1602355706864">
+    <state x="686" y="247" key="FileChooserDialogImpl" timestamp="1602428139482">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="2606" y="247" key="FileChooserDialogImpl/0.30.1536.834/1920.30.1920.1050@1920.30.1920.1050" timestamp="1602186095415" />
     <state x="549" y="202" key="FileChooserDialogImpl/0.30.1536.834@0.30.1536.834" timestamp="1602166304926" />
-    <state x="686" y="247" key="FileChooserDialogImpl/0.30.1920.1050@0.30.1920.1050" timestamp="1602355706864" />
-    <state x="604" y="366" key="NewPhpFileDialog" timestamp="1602169675513">
-      <screen x="0" y="30" width="1536" height="834" />
+    <state x="686" y="247" key="FileChooserDialogImpl/0.30.1920.1050@0.30.1920.1050" timestamp="1602428139482" />
+    <state x="755" y="453" key="NewPhpFileDialog" timestamp="1602430350726">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="604" y="366" key="NewPhpFileDialog/0.30.1536.834@0.30.1536.834" timestamp="1602169675513" />
+    <state x="755" y="453" key="NewPhpFileDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1602430350726" />
   </component>
 </project>

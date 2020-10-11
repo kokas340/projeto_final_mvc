@@ -3,7 +3,7 @@ if(!defined('ABSPATH'))exit;
 ?>
 <?
 //if($this->login_required && !$this->logged_in)
-   // return;
+     //return;
 if($this->logged_in){
     echo "BemVindo: ".$this->user_name;
 ?>

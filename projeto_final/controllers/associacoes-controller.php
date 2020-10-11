@@ -1,7 +1,8 @@
 <?
 class AssociacoesController extends MainController{
     /* Carrega a pagina "/views/login/index.php" */
-
+    public $login_required = true;
+    public $permissions_required = 'gerir-assoc';
     public function index(){
         $this->title = 'Associacoes';
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
@@ -10,6 +11,7 @@ class AssociacoesController extends MainController{
         /* Carrega os arquivos do view 
         views/_includes/head.php
         */
+
         $modelo = $this->load_model('associacoes/associacoes-adm-model');
         require ABSPATH . '/views/_includes/header.php';
         // /views/_includes/menu.php
@@ -28,6 +30,20 @@ class AssociacoesController extends MainController{
         /* Carrega os arquivos do view
         views/_includes/head.php
         */
+        if(!$this->logged_in){
+            //senao garante o logout
+            $this->logout();
+            //redericiona para a pagina de login
+            $this->goto_login();
+            //garante que o script nao vai passar daqui
+            return;
+        }
+        //verifica se o user tem a permissao para acessar a esta pagina
+        if(!$this->check_permissions($this->permissions_required, $this->userdata['socio_permissions'])){
+            //exibe uma mensagem
+            echo 'Não tem permissoes para aceder a esta pagina';
+            return;
+        }
         $modelo = $this->load_model('associacoes/associacoes-adm-model');
         require ABSPATH . '/views/_includes/header.php';
         // /views/_includes/menu.php

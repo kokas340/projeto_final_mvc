@@ -31,6 +31,10 @@
             <td>Permissions<br><small>(Separate Permissions using commas</small>:</td>
             <td><input type="text" name="socio_permissions" value="<?php echo htmlentities(chk_array($modelo->form_data, 'socio_permissions')); ?>"/></td>
         </tr>
+            <tr>
+                <td>Associacao: </td>
+                <td><input type="text" name="idAssoc" value="<?php echo htmlentities(chk_array($modelo->form_data, 'idAssoc')); ?>"/></td>
+            </tr>
         <tr>
             <td colspan="2">
                 <?php echo $modelo->form_msg;?>
@@ -54,6 +58,7 @@
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Permissões</th>
+                <th>Associacao</th>
                 <th>Edição</th>
             </tr>
         </thead>
@@ -65,6 +70,7 @@
                 <td><?php echo $fetch_userdata['nome'] ?></td>
                 <td><?php echo $fetch_userdata['email'] ?></td>
                 <td><?php echo implode(',' , unserialize($fetch_userdata['socio_permissions'])) ?></td>
+                <td><?php echo $modelo->get_assoc_by_id($fetch_userdata['idAssoc']);?></td>
                 <td>
                     <a href="<?php echo HOME_URI?>/socio-register/index/edit/<?php echo $fetch_userdata['idSocio']?>">Edit</a>
                     <a href="<?php echo HOME_URI?>/socio-register/index/del/<?php echo $fetch_userdata['idSocio']?>">Delete</a>

@@ -1,5 +1,5 @@
 <?php
-class AssociacoesAdmModel extends MainModel{
+class NoticiasAdmModel extends MainModel{
     public $posts_por_pagina = 5;
     public function __construct($db = false, $controller = null){
         //config o bd(PDO)
@@ -12,7 +12,7 @@ class AssociacoesAdmModel extends MainModel{
         $this->userdata = $this->controller->userdata;
     }
 
-    public function obter_assoc() {
+    public function obter_noticas() {
         // Verifica se o primeiro parâmetro é "edit"
         if (chk_array($this->parametros, 0) != 'edit') {
             return;
@@ -34,10 +34,10 @@ class AssociacoesAdmModel extends MainModel{
          */
         // if 1
         if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['insere_assoc'])) {
-            unset($_POST['insere_assoc']);
+            unset($_POST['insere_noticia']);
 
             // Atualiza os dados
-            $query = $this->db->update('associacao', 'idAssoc', $assoc_id, $_POST);
+            $query = $this->db->update('noticias', 'idNoticia', $assoc_id, $_POST);
 
             // Verifica a consulta
             if ($query) {
@@ -47,7 +47,7 @@ class AssociacoesAdmModel extends MainModel{
         }// // end if 1
         // Faz a consulta para obter o valor
         $query = $this->db->query(
-            'SELECT * FROM associacao WHERE idAssoc = ? LIMIT 1', array($assoc_id)
+            'SELECT * FROM noticias WHERE idNoticia = ? LIMIT 1', array($assoc_id)
         );
         // Obtém os dados
         $fetch_data = $query->fetch();
@@ -59,7 +59,7 @@ class AssociacoesAdmModel extends MainModel{
         $this->form_data = $fetch_data;
     }// obtem_projeto
 
-    public function listar_associacoes(){
+    public function listar_noticias(){
         //configura as variavrid que vamos utilizar
         $id = $where = $query_limit = null;
 
@@ -68,7 +68,7 @@ class AssociacoesAdmModel extends MainModel{
             //configura o ID para enviar para a consulta
             $id = array(chk_array($this->parametros, 0));
             //configura a clausula where da consulta
-            $where = " WHERE idAssoc = ? ";
+            $where = " WHERE idNoticia = ? ";
         }
         //configura a pagina a ser exibida
         $pagina = !empty($this->parametros[1]) ? $this->parametros[1] : 1;
@@ -86,16 +86,16 @@ class AssociacoesAdmModel extends MainModel{
         }
 
         //faz consulta
-        $query = $this->db->query('SELECT * FROM associacao ' . $where . ' ORDER BY idAssoc DESC' . $query_limit, $id);
+        $query = $this->db->query('SELECT * FROM noticias ' . $where . ' ORDER BY idNoticia DESC' . $query_limit, $id);
         return $query->fetchAll();
     }
 
-    public function insere_assoc(){
+    public function insere_noticias(){
         /*
           Verifica se algo foi passado e se vem do form que tem o campo
           insere_projeto.
          */
-        if ('POST' != $_SERVER['REQUEST_METHOD'] || empty($_POST['insere_assoc'])) {
+        if ('POST' != $_SERVER['REQUEST_METHOD'] || empty($_POST['insere_noticia'])) {
             return;
         }
 
@@ -118,7 +118,7 @@ class AssociacoesAdmModel extends MainModel{
           return;
           } */
         // Remove o campo insere_notica para não gerar problema com o PDO
-        unset($_POST['insere_assoc']);
+        unset($_POST['insere_noticia']);
         // Insere a imagem em $_POST
         //$_POST['imagem'] = $imagem;
         // Configura a data
@@ -130,7 +130,7 @@ class AssociacoesAdmModel extends MainModel{
         //$_POST['dataExec'] = $nova_data;
 
         // Insere os dados na base de dados
-        $query = $this->db->insert('associacao', $_POST);
+        $query = $this->db->insert('noticias', $_POST);
 
         // Verifica a consulta
         if ($query) {
@@ -142,7 +142,7 @@ class AssociacoesAdmModel extends MainModel{
         $this->form_msg = '<p class="error">Erro ao enviar dados!</p>';
     }
 
-    public function delete_assoc(){
+    public function delete_noticias(){
         //o parametro del devera ser enviado
         if(chk_array($this->parametros, 0) != 'del')
             return;
@@ -156,18 +156,17 @@ class AssociacoesAdmModel extends MainModel{
             //configuracao uma mensagem de confirmacao para o user
             $mensagem='<p class="alert">Tem Mesmo certeza que quer apagar o  projeto</p>';
             $mensagem.='<p><a href="'.$_SERVER['REQUEST_URI'] .'/confirma/">Sim</a> |';
-            $mensagem .='<a href="'. HOME_URI .'/associacao/adm">Não</a></p>';
+            $mensagem .='<a href="'. HOME_URI .'/noticias/adm">Não</a></p>';
             return $mensagem;
         }
 
         //configura o ID do projeto
         $projeto_id = (int) chk_array($this->parametros, 1);
-        echo $projeto_id+"uiperasbnivaernsd";
         //executa a consulta
-        $query = $this->db->delete('associacao', 'idAssoc', $projeto_id);
+        $query = $this->db->delete('noticias', 'idNoticia', $projeto_id);
         //redireciona para a pagina de administrcao de projetos
-        echo '<meta http-equiv="Refresh" content="0; url = '.HOME_URI.'/associacoes/adm">';
-        echo '<script type="text/javascript">window.location.href = "'.HOME_URI.'/associacoes/adm/" </script>';
+        echo '<meta http-equiv="Refresh" content="0; url = '.HOME_URI.'/noticias/adm">';
+        echo '<script type="text/javascript">window.location.href = "'.HOME_URI.'/noticias/adm/" </script>';
     }
 
     public function paginacao(){

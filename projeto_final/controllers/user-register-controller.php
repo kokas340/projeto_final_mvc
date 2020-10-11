@@ -1,7 +1,7 @@
 <?
 class UserRegisterController extends MainController{
     public $login_required = true;
-    //public $permissions_required = 'user-register';
+    public $permissions_required = 'user-register';
 
     //carrega a pagina
     //"/views/user-register/index.php"
