@@ -33,7 +33,7 @@ class NoticiasAdmModel extends MainModel{
           Se verdadeiro, atualiza os dados conforme a requisição.
          */
         // if 1
-        if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['insere_assoc'])) {
+        if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['insere_noticia'])) {
             unset($_POST['insere_noticia']);
 
             // Atualiza os dados
@@ -112,15 +112,15 @@ class NoticiasAdmModel extends MainModel{
         }
 
         // Tenta enviar a imagem
-        //$imagem = $this->upload_imagem();
+        $imagem = $this->upload_imagem();
         // Verifica se a imagem foi enviada
-        /* if (!$imagem) {
+         if (!$imagem) {
           return;
-          } */
+         }
         // Remove o campo insere_notica para não gerar problema com o PDO
         unset($_POST['insere_noticia']);
         // Insere a imagem em $_POST
-        //$_POST['imagem'] = $imagem;
+        $_POST['imagem'] = $imagem;
         // Configura a data
         /*
         $data = chk_array($_POST, 'dataExec');
@@ -136,7 +136,7 @@ class NoticiasAdmModel extends MainModel{
         if ($query) {
 
             // Retorna uma mensagem
-            $this->form_msg = '<p class="success">Projeto atualizada com sucesso!</p>';
+            $this->form_msg = '<p class="success">Noticia atualizada com sucesso!</p>';
             return;
         }
         $this->form_msg = '<p class="error">Erro ao enviar dados!</p>';
@@ -170,7 +170,59 @@ class NoticiasAdmModel extends MainModel{
     }
 
     public function paginacao(){
-
     }
+
+
+    public function upload_imagem(){
+        //verifica se o ficheiro da imagem existe
+        if(empty($_FILES['projeto_imagem']) && empty($_FILES['imagem'])){
+            return;
+        }
+
+        //configura os dados da imagem
+        $imagem = isset($_FILES['imagem']) ? $_FILES['imagem'] : $_FILES['projeto_imagem'];
+        //nome em extenso
+        $nome_imagem = strtolower($imagem['name']);
+        $ext_imagem = explode('.', $nome_imagem);
+        $ext_imagem = end($ext_imagem);
+        $nome_imagem = preg_replace('/[^a-zA-Z0-9]/', '', $nome_imagem);
+        $nome_imagem .= '_'.mt_rand().'.'.$ext_imagem;
+
+        //tipo nome temporario, erro e tamanho
+        $tipo_imagem = $imagem['type'];
+        $tmp_imagem = $imagem['tmp_name'];
+        $erro_imagem = $imagem['error'];
+        $tamanho_imagem = $imagem['size'];
+
+        //os mime type permitidos
+        $permitir_tipos = array(
+            'imagem/bmp',
+            'image/x-windows-bmp',
+            'image/gif',
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png'
+        );
+
+        //verifica se o mimetype enviado e permitido
+        if(!in_array($tipo_imagem, $permitir_tipos)){
+            //retorna uma mensagem
+            $this->form_msg = '<p class="error">deve enviar uma imagem nos formatos jpeg, gif, png</p>';
+            return;
+        }
+
+        //tenta mover o ficheiro enviado
+        if(!move_uploaded_file($tmp_imagem, UP_ABSPATH.'/'.$nome_imagem)){
+            //retorna uma mensagem
+            $this->form_msg = '<p class="error">Erro ao enviar imagem</p>';
+            return;
+        }
+
+        //retorna o nome da imagem
+        return $nome_imagem;
+    }
+
+
+
 }
 ?>

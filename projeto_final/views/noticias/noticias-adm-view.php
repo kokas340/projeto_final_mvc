@@ -35,9 +35,7 @@ $delete_uri = $adm_uri.'del/';
             <tr>
                 <td>
                     Imagem: <br>
-                    <input type="text" name="imagem" value="<?
-                    echo htmlentities(chk_array($modelo->form_data, 'imagem'));
-                    ?>"/>
+                    <input type="file" name="imagem" value=""/>
                 </td>
             </tr>
             <tr>
@@ -75,7 +73,11 @@ $delete_uri = $adm_uri.'del/';
                 <td><a href="<? echo HOME_URI.'/noticias/index/'.$noticias['idNoticia'];?>"><? echo $noticias['idNoticia'];?></a></td>
                 <td><? echo $noticias['titulo'];?></td>
                 <td><? echo $noticias['noticia'];?></td>
-                <td><? echo $noticias['imagem'];?></td>
+                <td>
+                    <p>
+                        <img src="<? echo HOME_URI.'views/_uploads/'.$noticias['imagem'];?>" width="30px">
+                    </p>
+                </td>
                 <td>
                     <a href="<? echo $edit_uri.$noticias['idNoticia'];?>" >Editar:</a>
                     &nbsp;&nbsp;
