@@ -15,7 +15,6 @@ class NoticiasController extends MainController{
 
     public function adm(){
         $this->title = "Noticias ADM";
-
         $modelo = $this->load_model('noticias/noticias-adm-model');
         require ABSPATH . '/views/_includes/header.php';
         // /views/_includes/menu.php

@@ -1,4 +1,4 @@
-<?php if(!defined('ABSPATH')) exit; ?>
+<?php verifyPath();?>
 
 <div class="wrap">
 
@@ -33,8 +33,20 @@
         </tr>
             <tr>
                 <td>Associacao: </td>
-                <td><input type="text" name="idAssoc" value="<?php echo htmlentities(chk_array($modelo->form_data, 'idAssoc')); ?>"/></td>
+                <td><input type="text" name="idAssoc" value="<?php echo htmlentities($modelo->get_assoc_by_id(chk_array($modelo->form_data, 'idAssoc'))); ?>"/></td>
+
             </tr>
+            <label for="cars">Choose a car:</label>
+
+            <select name="assoc" id="assoc">
+                <? /*<?
+                $list_assoc = $modelo->get_assoc();
+                foreach ($list_assoc as $item):
+                    print_r($item);
+                ?>
+                <option name ="<? $item['idAssoc']; ?>" value="<? $modelo->get_assoc_by_id(1); ?>"><? $modelo->get_assoc_by_id(1);?></option>
+                <? endforeach; ?>*/ ?>
+            </select>
         <tr>
             <td colspan="2">
                 <?php echo $modelo->form_msg;?>

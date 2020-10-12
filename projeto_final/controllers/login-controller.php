@@ -1,7 +1,6 @@
 <?
 class LoginController extends MainController{
     /* Carrega a pagina "/views/login/index.php" */
-
     public function index(){
         $this->title = 'Login';
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
@@ -22,7 +21,6 @@ class LoginController extends MainController{
 
     public function delete(){
         $this->logout();
-        echo "ola";
         //redireciona para a pagina de login
         $this->goto_login();
     }

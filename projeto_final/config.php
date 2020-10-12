@@ -3,8 +3,8 @@
 //caminho para a rais
 define('ABSPATH', dirname(__FILE__));
 
-//caminho para a pasta de uploads
-define('UP_ABSPATH', ABSPATH.'/views/uploads');
+//caminho para a pasta de _uploads
+define('UP_ABSPATH', ABSPATH.'/views/_uploads');
 
 //URL da home
 define('HOME_URI', 'http://localhost/projeto_final');

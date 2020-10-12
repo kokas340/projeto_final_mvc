@@ -1,28 +1,28 @@
 <?php
-class AssociacoesAdmModel extends ItemsAbstract {
+class EventosAdmModel extends ItemsAbstract{
+
     function insere_form()
     {
-        return 'insere_assoc';
+        return 'insere_evento';
     }
 
     function table_name()
     {
-        return 'associacao';
+        return 'eventos';
     }
 
     function id_table()
     {
-        return 'idAssoc';
+        return 'idEvento';
     }
 
     function url_name()
     {
-        return 'associacoes';
+        return 'evento';
     }
 
     function haveImage()
     {
-        return false;
+        return true;
     }
 }
-?>

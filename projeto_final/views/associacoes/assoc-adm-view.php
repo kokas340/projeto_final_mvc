@@ -1,4 +1,4 @@
-<?if(!defined('ABSPATH')) exit;?>
+<?verifyPath();?>
 
 <?
 //configura as URLs
@@ -11,9 +11,9 @@ $delete_uri = $adm_uri.'del/';
     <?
     //mensagem de configuracao caso user tente apagar algo
     echo $modelo->form_confirma;
-    $modelo->insere_assoc();
-    $modelo->obter_assoc();
-    $modelo->delete_assoc();
+    $modelo->insere_items();
+    $modelo->obter_items();
+    $modelo->delete_items();
     ?>
     <!--
     Formulario de edicao de projetos
@@ -62,7 +62,7 @@ $delete_uri = $adm_uri.'del/';
 
     <!-- Lista os projetos -->
     <?
-    $lista = $modelo->listar_associacoes();
+    $lista = $modelo->listar_items();
     ?>
     <h1>Lista de Projetos</h1>
     <table id="tbl-projeto" class="list-table">
