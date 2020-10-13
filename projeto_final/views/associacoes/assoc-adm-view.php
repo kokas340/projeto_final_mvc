@@ -5,6 +5,7 @@
 $adm_uri = HOME_URI.'/associacoes/adm/';
 $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';
+$admin_assoc_uri = HOME_URI.'/associacoes/admassoc/';
 ?>
 
 <div class="wrap">
@@ -88,6 +89,8 @@ $delete_uri = $adm_uri.'del/';
                     <a href="<? echo $edit_uri.$assoc['idAssoc'];?>" >Editar:</a>
                     &nbsp;&nbsp;
                     <a href="<? echo $delete_uri.$assoc['idAssoc'];?>" >Delete:</a>
+                    &nbsp;&nbsp;
+                    <a href="<? echo $admin_assoc_uri.$assoc['idAssoc'];?>" >Administrar:</a>
                 </td>
             </tr>
         <? endforeach;?>

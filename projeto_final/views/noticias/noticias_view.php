@@ -16,9 +16,10 @@
         //verifica se estamos a visualizar um unico projeto
         if(is_numeric(chk_array($modelo->parametros,0))):?>
             <p>Noticia: <?echo $noticias['noticia'];?></p>
-        <p>
-            <img src="<?echo HOME_URI.'/views/_uploads/'.$noticias['imagem'];?>">
-        </p>
+            <p>Autor (associação): <? echo $modelo->get_assoc_by_id($noticias['idAssoc']); ?></p>
+            <p>
+                <img src="<?echo HOME_URI.'/views/_uploads/'.$noticias['imagem'];?>">
+            </p>
             <?
             $this->prev_page = true;
             if($this->prev_page){

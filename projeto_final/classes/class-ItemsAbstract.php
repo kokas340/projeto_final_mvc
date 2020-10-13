@@ -91,6 +91,23 @@ abstract class ItemsAbstract extends MainModel{
     }
 
     public function delete_items($parametros = array()){
+        //echo chk_array($this->parametros, 3);
+        if(chk_array($this->parametros, 3) != 'soc')
+            $this->delete_items_not_sepecified();
+        else{
+            if(chk_array($this->parametros, 1) != 'del')
+                return;
+
+            if(!is_numeric(chk_array($this->parametros, 2)))
+                return;
+            $projeto_id = (int) chk_array($this->parametros, 2);
+            //echo $projeto_id;
+            $query = $this->db->delete('socios', 'idSocio', $projeto_id);
+        }
+
+    }
+
+    public function delete_items_not_sepecified(){
         if(chk_array($this->parametros, 0) != 'del')
             return;
 
@@ -105,7 +122,9 @@ abstract class ItemsAbstract extends MainModel{
         }
 
         $projeto_id = (int) chk_array($this->parametros, 1);
+        //echo $projeto_id;
         $query = $this->db->delete($this->table_name(), $this->id_table(), $projeto_id);
+        //header('http://localhost/projeto_final/associacoes/admassoc');
         //redireciona para a pagina de administrcao de projetos
         echo '<meta http-equiv="Refresh" content="0; url = '.HOME_URI.'/'.$this->url_name().'/adm">';
         echo '<script type="text/javascript">window.location.href = "'.HOME_URI.'/'.$this->url_name().'/adm/" </script>';
@@ -198,6 +217,25 @@ abstract class ItemsAbstract extends MainModel{
 
         //retorna o nome da imagem
         return $nome_imagem;
+    }
+
+    public function get_assoc(){
+        $query = $this->db->query('SELECT * FROM associacao');
+        return $query->fetchAll();
+    }
+
+    public function get_assoc_by_id($id = 0){
+        if($id != 0) $query = $this->db->query('SELECT * FROM associacao WHERE idAssoc = '.$id);
+        if(!empty($query)) {
+            $data = $query->fetch();
+            return $data['nome'];
+        }
+        return "Sem associação";
+    }
+
+    public function getSociosAssoc($id = 0){
+        $query = $this->db->query('SELECT * FROM socios WHERE idAssoc = '.$id);
+        return $query->fetchAll();
     }
 
 
