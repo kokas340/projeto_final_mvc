@@ -23,7 +23,8 @@ class LoginController extends MainController{
     public function delete(){
         $this->logout();
         //redireciona para a pagina de login
-        $this->goto_login();
+        //$this->goto_login();
+        header('location:http://localhost/projeto_final/login');
     }
 }
 ?>

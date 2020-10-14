@@ -34,9 +34,10 @@ $modelo->inserir_quotas();
                 <select name="idSocio" id="idSocio">
                     <?
                     $list_assoc = $modelo->getAll('socios');
-                    foreach ($list_assoc as $item):
-                        ?>
-                        <option name ="idSocio" value="<? echo htmlentities($item['idSocio']); ?>"><? echo htmlentities($item['nome']); ?></option>
+                    foreach ($list_assoc as $item):?>
+                        <? if($item['idAssoc'] == $id_assoc):?>
+                            <option name ="idSocio" value="<? echo htmlentities($item['idSocio']); ?>"><? echo htmlentities($item['nome']); ?></option>
+                        <? endif;?>
                     <? endforeach; ?>
                 </select>
             </td>
