@@ -41,7 +41,7 @@ $delete_uri = $adm_uri.'del/';
             <tr>
                 <td>
                     <label for="idAssoc">Escolhe a associação:</label>
-                    <select name="idAssoc">
+                    <select name="idAssoc" id="idAssoc">
                         <?
                         $list_assoc = $modelo->get_assoc();
                         foreach ($list_assoc as $item):

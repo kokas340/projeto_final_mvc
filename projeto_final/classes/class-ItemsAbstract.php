@@ -9,35 +9,69 @@ abstract class ItemsAbstract extends MainModel{
     }
 
     public function obter_items() {
-        if (chk_array($this->parametros, 0) != 'edit') {
-            return;
-        }
-
-        if (!is_numeric(chk_array($this->parametros, 1))) {
-            return;
-        }
-
-        // Configura o ID da projeto
-        $assoc_id = chk_array($this->parametros, 1);
-        if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST[$this->insere_form()])) {
-            unset($_POST[$this->insere_form()]);
-
-            $query = $this->db->update($this->table_name(), $this->id_table(), $assoc_id, $_POST);
-
-            if ($query) {
-                $this->form_msg = '<p class="success">projeto atualizado com sucesso!</p>';
+        //print_r($this->parametros);
+        if(chk_array($this->parametros, 3) != 'soc'){
+            if (chk_array($this->parametros, 0) != 'edit') {
+                return;
             }
-        }
-        $query = $this->db->query(
-            'SELECT * FROM '.$this->table_name().' WHERE '.$this->id_table().' = ? LIMIT 1', array($assoc_id)
-        );
-        $fetch_data = $query->fetch();
 
-        if (empty($fetch_data)) {
-            return;
+            if (!is_numeric(chk_array($this->parametros, 1))) {
+                return;
+            }
+
+            // Configura o ID da projeto
+            $assoc_id = chk_array($this->parametros, 1);
+            if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST[$this->insere_form()])) {
+                unset($_POST[$this->insere_form()]);
+
+                $query = $this->db->update($this->table_name(), $this->id_table(), $assoc_id, $_POST);
+
+                if ($query) {
+                    $this->form_msg = '<p class="success">projeto atualizado com sucesso!</p>';
+                }
+            }
+            $query = $this->db->query(
+                'SELECT * FROM '.$this->table_name().' WHERE '.$this->id_table().' = ? LIMIT 1', array($assoc_id)
+            );
+            $fetch_data = $query->fetch();
+
+            if (empty($fetch_data)) {
+                return;
+            }
+
+            $this->form_data = $fetch_data;
+        }else{
+            if (chk_array($this->parametros, 1) != 'edit') {
+                return;
+            }
+
+            if (!is_numeric(chk_array($this->parametros, 2))) {
+                return;
+            }
+
+            // Configura o ID da projeto
+            $assoc_id = chk_array($this->parametros, 2);
+            if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['insere_soc'])) {
+                unset($_POST['insere_soc']);
+
+                $query = $this->db->update('socios', 'idSocio', $assoc_id, $_POST);
+
+                if ($query) {
+                    $this->form_msg = '<p class="success">projeto atualizado com sucesso!</p>';
+                }
+            }
+            $query = $this->db->query(
+                'SELECT * FROM socios WHERE idSocio = ? LIMIT 1', array($assoc_id)
+            );
+            $fetch_data = $query->fetch();
+
+            if (empty($fetch_data)) {
+                return;
+            }
+
+            $this->form_data = $fetch_data;
         }
 
-        $this->form_data = $fetch_data;
     }
 
     public function listar_items(){
@@ -103,6 +137,7 @@ abstract class ItemsAbstract extends MainModel{
             $projeto_id = (int) chk_array($this->parametros, 2);
             //echo $projeto_id;
             $query = $this->db->delete('socios', 'idSocio', $projeto_id);
+            header('location: http://localhost/projeto_final/associacoes/admassoc/'.chk_array($this->parametros, 0));
         }
 
     }
@@ -128,6 +163,18 @@ abstract class ItemsAbstract extends MainModel{
         //redireciona para a pagina de administrcao de projetos
         echo '<meta http-equiv="Refresh" content="0; url = '.HOME_URI.'/'.$this->url_name().'/adm">';
         echo '<script type="text/javascript">window.location.href = "'.HOME_URI.'/'.$this->url_name().'/adm/" </script>';
+    }
+
+    public function getAll($table_name = ''){
+        if($table_name != ''){
+            $query = $this->db->query('SELECT * FROM '.$table_name);
+            return $query->fetchAll();
+        }
+    }
+
+    public function getSoc(){
+        $query =  $this->db->query('SELECT * FROM socios');
+        return $query->fetchAll();
     }
 
     /*public function delete_items() {

@@ -37,7 +37,8 @@ $modelo->delete_items();
     </table>
     <input type="hidden" name="insere_soc" value="1"/>
 </form>
-
+<a href="http://localhost/projeto_final/noticias/adm">New noticia</a>
+<a href='http://localhost/projeto_final/associacoes/assocquotas/<? echo $id_assoc; ?>'>Quotas ADM</a>
 <div class="wrap">
     <?
     $lista = $modelo->getSociosAssoc($id_assoc);
@@ -57,7 +58,7 @@ $modelo->delete_items();
                 <td><? echo $assoc['nome'];?></td>
                 <td><? echo $assoc['email'];?></td>
                 <td>
-                    <a href="<? echo $edit_uri.$assoc['idSocio'];?>" >Editar:</a>
+                    <a href="<? echo $edit_uri.$assoc['idSocio'].'/soc';?>" >Editar:</a>
                     &nbsp;&nbsp;
                     <a href="<? echo $delete_uri.$assoc['idSocio'].'/soc';?>" >Delete:</a>
                 </td>

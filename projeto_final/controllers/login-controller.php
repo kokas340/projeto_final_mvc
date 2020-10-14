@@ -1,10 +1,11 @@
 <?
 class LoginController extends MainController{
     /* Carrega a pagina "/views/login/index.php" */
+    public $login_required = true;
+    public $permissions_required = '';
     public function index(){
         $this->title = 'Login';
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
-
         //login nao tem model
         /* Carrega os arquivos do view 
         views/_includes/head.php
