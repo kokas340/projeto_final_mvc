@@ -83,5 +83,12 @@ class AssociacoesAdmModel extends ItemsAbstract {
         }
         $this->form_msg = '<p class="error">Erro ao enviar dados!</p>';
     }
+
+    public function getQuotas($id = 0){
+        if($id!=0){
+            $query = $this->db->query('SELECT * FROM quotas WHERE idSocio = '.$id);
+            return $query->fetchAll();
+        }
+    }
 }
 ?>

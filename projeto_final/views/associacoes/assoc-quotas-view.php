@@ -1,12 +1,14 @@
 <?php
 verifyPath();
-$id_assoc = 0;
+$id_soc = 0;
 if(chk_array($this->parametros, 0))
-    $id_assoc = chk_array($this->parametros, 0);
-$adm_uri = HOME_URI.'/associacoes/assocquotas/'.$id_assoc.'/';
+    $id_soc = chk_array($this->parametros, 0);
+$adm_uri = HOME_URI.'/associacoes/assocquotas/'.$id_soc.'/';
 $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';
 $modelo->inserir_quotas();
+$modelo->obter_items();
+$modelo->delete_items();
 ?>
 <form method="post" action="" enctype="multipart/form-data">
     <table class="form-table">
@@ -29,20 +31,6 @@ $modelo->inserir_quotas();
             </td>
         </tr>
         <tr>
-            <td>
-                <label for="idSocio">Escolhe o socio:</label>
-                <select name="idSocio" id="idSocio">
-                    <?
-                    $list_assoc = $modelo->getAll('socios');
-                    foreach ($list_assoc as $item):?>
-                        <? if($item['idAssoc'] == $id_assoc):?>
-                            <option name ="idSocio" value="<? echo htmlentities($item['idSocio']); ?>"><? echo htmlentities($item['nome']); ?></option>
-                        <? endif;?>
-                    <? endforeach; ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
             <td colspan="2">
                 <?
                 echo $modelo->form_msg;
@@ -52,37 +40,34 @@ $modelo->inserir_quotas();
             </td>
         </tr>
     </table>
+    <input type="hidden" name="idSocio" value="<? echo $id_soc;?>">
     <input type="hidden" name="insere_quota" value="1"/>
 </form>
 
 <div class="wrap">
     <?
-    $lista = $modelo->getSociosAssoc($id_assoc);
+    $lista = $modelo->getQuotas($id_soc);
     ?>
-    <h1>Lista de quotas da associação: <? echo $modelo->get_assoc_by_id($id_assoc) ?></h1>
+    <h1>Lista de quotas da associação: <? echo $modelo->getSocName($id_soc) ?></h1>
     <table id="tbl-projeto" class="list-table">
         <thead>
         <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Quota</th>
+            <th>Preço</th>
             <th>Data Comeco</th>
             <th>Data Termino</th>
             <th>Edit Quotas</th>
         </tr>
         </thead>
         <tbody>
-        <? foreach($lista as $socio): ?>
+        <? foreach($lista as $quotas): ?>
             <tr>
-                <td><? echo $socio['nome'];?></td>
-                <td><? echo $socio['email'];?></td>
-                <td><? echo $modelo->obterQuotasById($socio['idSocio'], 'preco');?></td>
-                <td><? echo $modelo->obterQuotasById($socio['idSocio'], 'dataComeco');?></td>
-                <td><? echo $modelo->obterQuotasById($socio['idSocio'], 'dataTermino');?></td>
+                <td><? echo $quotas['preco'];?></td>
+                <td><? echo $quotas['dataComeco'];?></td>
+                <td><? echo $quotas['dataTermino'];?></td>
                 <td>
-                    <a href="<? echo $edit_uri.$socio['idSocio'].'/soc';?>" >Editar:</a>
+                    <a href="<? echo $edit_uri.$quotas['idQuota'].'/qo';?>" >Editar:</a>
                     &nbsp;&nbsp;
-                    <a href="<? echo $delete_uri.$socio['idSocio'].'/soc';?>" >Delete:</a>
+                    <a href="<? echo $delete_uri.$quotas['idQuota'].'/qo';?>" >Delete:</a>
                 </td>
             </tr>
         <? endforeach;?>

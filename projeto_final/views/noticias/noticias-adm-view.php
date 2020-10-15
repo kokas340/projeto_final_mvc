@@ -5,6 +5,8 @@
 $adm_uri = HOME_URI.'/noticias/adm/';
 $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';
+
+
 ?>
 
 <div class="wrap">

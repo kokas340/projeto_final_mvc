@@ -7,6 +7,7 @@ $adm_uri = HOME_URI.'/associacoes/admassoc/'.$id_assoc.'/';
 $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';
 echo $modelo->form_confirma;
+$admin_quota_uri = HOME_URI.'/associacoes/assocquotas/';
 $modelo->insere_items();
 $modelo->obter_items();
 $modelo->delete_items();
@@ -37,13 +38,12 @@ $modelo->delete_items();
     </table>
     <input type="hidden" name="insere_soc" value="1"/>
 </form>
-<a href="http://localhost/projeto_final/noticias/adm">New noticia</a>
-<a href='http://localhost/projeto_final/associacoes/assocquotas/<? echo $id_assoc; ?>'>Quotas ADM</a>
+<a href="http://localhost/projeto_final/noticias/adm/">New noticia</a>
 <div class="wrap">
     <?
     $lista = $modelo->getSociosAssoc($id_assoc);
     ?>
-    <h1>Lista de socios da associação: <? echo $modelo->get_assoc_by_id($id_assoc) ?></h1>
+    <h1>Lista de socios da associação: <? echo $modelo->get_assoc_by_id($id_assoc); ?></h1>
     <table id="tbl-projeto" class="list-table">
         <thead>
         <tr>
@@ -61,6 +61,8 @@ $modelo->delete_items();
                     <a href="<? echo $edit_uri.$assoc['idSocio'].'/soc';?>" >Editar:</a>
                     &nbsp;&nbsp;
                     <a href="<? echo $delete_uri.$assoc['idSocio'].'/soc';?>" >Delete:</a>
+                    &nbsp;&nbsp;
+                    <a href="<? echo $admin_quota_uri.$assoc['idSocio'];?>" >Quotas:</a>
                 </td>
             </tr>
         <? endforeach;?>

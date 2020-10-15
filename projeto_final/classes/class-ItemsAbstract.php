@@ -10,7 +10,7 @@ abstract class ItemsAbstract extends MainModel{
 
     public function obter_items() {
         //print_r($this->parametros);
-        if(chk_array($this->parametros, 3) != 'soc'){
+        if(chk_array($this->parametros, 3) != 'soc' && chk_array($this->parametros, 3) != 'qo'){
             if (chk_array($this->parametros, 0) != 'edit') {
                 return;
             }
@@ -40,7 +40,7 @@ abstract class ItemsAbstract extends MainModel{
             }
 
             $this->form_data = $fetch_data;
-        }else{
+        }elseif(chk_array($this->parametros, 3) == 'soc'){
             if (chk_array($this->parametros, 1) != 'edit') {
                 return;
             }
@@ -62,6 +62,36 @@ abstract class ItemsAbstract extends MainModel{
             }
             $query = $this->db->query(
                 'SELECT * FROM socios WHERE idSocio = ? LIMIT 1', array($assoc_id)
+            );
+            $fetch_data = $query->fetch();
+
+            if (empty($fetch_data)) {
+                return;
+            }
+
+            $this->form_data = $fetch_data;
+        }else{
+            if (chk_array($this->parametros, 1) != 'edit') {
+                return;
+            }
+
+            if (!is_numeric(chk_array($this->parametros, 2))) {
+                return;
+            }
+
+            // Configura o ID da projeto
+            $assoc_id = chk_array($this->parametros, 2);
+            if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['insere_quota'])) {
+                unset($_POST['insere_quota']);
+
+                $query = $this->db->update('quotas', 'idQuota', $assoc_id, $_POST);
+
+                if ($query) {
+                    $this->form_msg = '<p class="success">Quota atualizado com sucesso!</p>';
+                }
+            }
+            $query = $this->db->query(
+                'SELECT * FROM quotas WHERE idQuota = ? LIMIT 1', array($assoc_id)
             );
             $fetch_data = $query->fetch();
 
@@ -126,9 +156,9 @@ abstract class ItemsAbstract extends MainModel{
 
     public function delete_items($parametros = array()){
         //echo chk_array($this->parametros, 3);
-        if(chk_array($this->parametros, 3) != 'soc')
+        if(chk_array($this->parametros, 3) != 'soc' && chk_array($this->parametros, 3) != 'qo')
             $this->delete_items_not_sepecified();
-        else{
+        elseif(chk_array($this->parametros, 3) == 'soc'){
             if(chk_array($this->parametros, 1) != 'del')
                 return;
 
@@ -138,6 +168,16 @@ abstract class ItemsAbstract extends MainModel{
             //echo $projeto_id;
             $query = $this->db->delete('socios', 'idSocio', $projeto_id);
             header('location: http://localhost/projeto_final/associacoes/admassoc/'.chk_array($this->parametros, 0));
+        }else{
+            if(chk_array($this->parametros, 1) != 'del')
+                return;
+
+            if(!is_numeric(chk_array($this->parametros, 2)))
+                return;
+            $projeto_id = (int) chk_array($this->parametros, 2);
+            //echo $projeto_id;
+            $query = $this->db->delete('quotas', 'idQuota', $projeto_id);
+            header('location: http://localhost/projeto_final/associacoes/assocquotas/'.chk_array($this->parametros, 0));
         }
 
     }
@@ -175,6 +215,12 @@ abstract class ItemsAbstract extends MainModel{
     public function getSoc(){
         $query =  $this->db->query('SELECT * FROM socios');
         return $query->fetchAll();
+    }
+
+    public function getSocName($id = 0){
+        $query =  $this->db->query('SELECT * FROM socios WHERE idSocio = '.$id);
+        $data = $query->fetch();
+        return $data['nome'];
     }
 
     /*public function delete_items() {
