@@ -55,6 +55,7 @@ $modelo->delete_items();
             <th>Preço</th>
             <th>Data Comeco</th>
             <th>Data Termino</th>
+            <th>Pagamento</th>
             <th>Edit Quotas</th>
         </tr>
         </thead>
@@ -64,6 +65,7 @@ $modelo->delete_items();
                 <td><? echo $quotas['preco'];?></td>
                 <td><? echo $quotas['dataComeco'];?></td>
                 <td><? echo $quotas['dataTermino'];?></td>
+                <td><? if($quotas['pago'] == 0) echo "Não pago"; else echo "Pago";?></td>
                 <td>
                     <a href="<? echo $edit_uri.$quotas['idQuota'].'/qo';?>" >Editar:</a>
                     &nbsp;&nbsp;

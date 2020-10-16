@@ -227,5 +227,53 @@
             $query = $this->db->query('SELECT * FROM associacao');
             return $query->fetchAll();
         }
+
+        public function get_soc_by_id($id = 0){
+            $query = $this->db->query('SELECT * FROM socios WHERE idSocio = '.$id);
+            return $query->fetch();
+        }
+
+        public function getQuotas($id = 0){
+            if($id!=0){
+                $query = $this->db->query('SELECT * FROM quotas WHERE idSocio = '.$id);
+                return $query->fetchAll();
+            }
+        }
+
+        public function getSocName($id = 0){
+            $query =  $this->db->query('SELECT * FROM socios WHERE idSocio = '.$id);
+            $data = $query->fetch();
+            return $data['nome'];
+        }
+
+        public function pay($parametros = array()){
+
+            //O ID do user
+            $idQuota = null;
+
+            //Verifica se existe o parâmetro "del" na URL
+            if(chk_array($parametros, 1) == 'pay'){
+                //Verifica se o valor do parâmetro é um número
+                if(is_numeric(chk_array($parametros, 2))){
+                    //Configura o ID do user a ser apagado
+                    $idQuota = chk_array($parametros, 2);
+                }
+            }
+
+            //Verifica se o ID não está vazio
+            if(!empty($idQuota)){
+                //O ID precisa ser inteiro
+                $idQuota = (int) $idQuota;
+
+                //Elimina o user
+                $query = $this->db->update('quotas', 'idQuota', $idQuota, array("pago" => 1));
+
+                //Redireciona para a página de listagem
+                //echo '<script type="text/javascript">window.location.href="' . HOME_URI . '/socio-register/";</script>';
+                header('location: '.HOME_URI.'/perfil/me/'.chk_array($parametros, 0));
+                return;
+            }
+        }
+
     }
 ?>

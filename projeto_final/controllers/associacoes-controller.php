@@ -54,7 +54,7 @@ class AssociacoesController extends MainController{
         require ABSPATH . '/views/_includes/footer.php';
     }
 
-    public function admassoc($parametros){
+    public function admassoc(){
         $this->title = 'Associacoes Specify Adm';
         //$this->permissions_required = 'gerir-assoc-specify';
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();

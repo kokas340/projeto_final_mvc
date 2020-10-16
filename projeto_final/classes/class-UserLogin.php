@@ -11,6 +11,7 @@ class UserLogin {
     public $userdata;
     public $login_error;
     public $user_name;
+    public $id_soc;
 
     public function check_userlogin() {
 
@@ -102,6 +103,7 @@ class UserLogin {
         // Obtém o ID do user e o nome
         $user_id = (int) $fetch['idSocio'];
         $user_name = $fetch['login'];
+        $this->id_soc = $user_id;
 
         // Verifica se o ID existe
         if (empty($user_id)) {
