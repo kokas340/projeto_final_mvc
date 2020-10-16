@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Out-2020 às 01:46
+-- Tempo de geração: 16-Out-2020 às 22:40
 -- Versão do servidor: 10.4.14-MariaDB
 -- versão do PHP: 7.3.22
 
@@ -120,23 +120,27 @@ CREATE TABLE `quotas` (
   `idSocio` int(11) NOT NULL,
   `dataComeco` date NOT NULL,
   `dataTermino` date NOT NULL,
-  `preco` float NOT NULL
+  `preco` float NOT NULL,
+  `pago` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `quotas`
 --
 
-INSERT INTO `quotas` (`idQuota`, `idSocio`, `dataComeco`, `dataTermino`, `preco`) VALUES
-(1, 7, '2020-10-10', '2020-10-14', 300),
-(2, 0, '2020-10-10', '2020-10-14', 500),
-(3, 0, '2020-10-10', '2020-10-14', 500),
-(4, 0, '2020-10-10', '2020-10-14', 500),
-(5, 0, '2020-10-10', '2020-10-14', 500),
-(6, 48, '2020-10-10', '2020-10-14', 500),
-(8, 43, '2020-10-10', '2020-10-14', 500),
-(12, 46, '2020-10-10', '2020-10-14', 6000),
-(16, 46, '2020-10-10', '2020-10-14', 500);
+INSERT INTO `quotas` (`idQuota`, `idSocio`, `dataComeco`, `dataTermino`, `preco`, `pago`) VALUES
+(1, 7, '2020-10-10', '2020-10-14', 300, 1),
+(2, 0, '2020-10-10', '2020-10-14', 500, 0),
+(3, 0, '2020-10-10', '2020-10-14', 500, 0),
+(4, 0, '2020-10-10', '2020-10-14', 500, 0),
+(5, 0, '2020-10-10', '2020-10-14', 500, 0),
+(6, 48, '2020-10-10', '2020-10-14', 500, 0),
+(8, 43, '2020-10-10', '2020-10-14', 500, 0),
+(12, 46, '2020-10-10', '2020-10-14', 6000, 0),
+(16, 46, '2020-10-10', '2020-10-14', 500, 0),
+(18, 54, '2020-10-10', '2020-10-14', 545455000, 0),
+(19, 7, '2020-10-10', '2020-10-14', 5000, 1),
+(20, 7, '2020-10-10', '2020-10-14', 600, 0);
 
 -- --------------------------------------------------------
 
@@ -160,12 +164,12 @@ CREATE TABLE `socios` (
 --
 
 INSERT INTO `socios` (`idSocio`, `nome`, `email`, `login`, `password`, `socio_permissions`, `socio_session_id`, `idAssoc`) VALUES
-(7, 'francisco', 'guilhermejesus216@gmail.com', 'admin', '$2a$08$0kXFCi6Su2VCIUDWSr4Z5.8iyT1K/gq6SECudXO5idceKB.nP2Baa', 'a:5:{i:0;s:5:\"admin\";i:1;s:12:\"gerir-socios\";i:2;s:11:\"gerir-assoc\";i:3;s:13:\"gerir-eventos\";i:4;s:19:\"gerir-assoc-specify\";}', '6776faaa8489c11d2a223a20151e0577', 1),
+(7, 'francisco', 'guilhermejesus216@gmail.com', 'admin', '$2a$08$0kXFCi6Su2VCIUDWSr4Z5.8iyT1K/gq6SECudXO5idceKB.nP2Baa', 'a:5:{i:0;s:5:\"admin\";i:1;s:12:\"gerir-socios\";i:2;s:11:\"gerir-assoc\";i:3;s:13:\"gerir-eventos\";i:4;s:19:\"gerir-assoc-specify\";}', 'fc08f15ecc83b9ee3b82a762edb8a411', 1),
 (43, 'dercio', 'fiwjnrk@gmail.com', 'dercio', '$2a$08$YCAPEmwU6VLs7ipzmObkJuDLV753DgfGV.fMqYI5zhTecvXojtcue', 'a:2:{i:0;s:5:\"admin\";i:1;s:11:\"gerir-assoc\";}', 'd234fb1cf92037a75b47e53279158e16', 1),
 (46, 'matt', '@gmail.com', 'matt', '$2a$08$Yj3sUCmsbCAS3XfhJmBJiewNiTueNA.8jOMJQXDNoElRDSRQBEL46', 'a:1:{i:0;s:5:\"admin\";}', '3a6120fc32e224cbb77f11018c084ef1', 2),
 (48, 'nidio', 'ijvene', 'nidio', '$2a$08$F.l.JJwLg3LApXH.GzvuzOw56KLlI/opU9AMrVh/H654HIMKa3ZSm', 'a:1:{i:0;s:12:\"gerir-socios\";}', '0a2d9f2552ec995475d504dad56e72ad', 2),
 (50, 'nata', 'guilhermejesus216@gmail.com', 'na', '$2a$08$Zi1VqYlc5lu.CBYVOuY/6.Bv1vREjZeLeTfWyyVMo5oekrpn.4Lfq', 'a:1:{i:0;s:12:\"gerir-socios\";}', '1f7eae612381dfc149f5894b93c99b1c', 2),
-(54, 'adm', 'vfer', 'adm', '$2a$08$tsEJOJ8RQs.bK2K8IKBQOuCtovP/cAs4lwWKnOXML0.BcRviEsGGe', 'a:5:{i:0;s:5:\"admin\";i:1;s:12:\"gerir-socios\";i:2;s:11:\"gerir-assoc\";i:3;s:13:\"gerir-eventos\";i:4;s:19:\"gerir-assoc-specify\";}', 'daaf3fa3576d04e11287f396237f5a97', 2);
+(54, 'adm', 'guilhermejesus216@gmail.com', 'adm', '$2a$08$4AfES5TqzwbzK0ZeV.3UCe5JiVviwFUlLS525yT4eRWd.k/sx2rLC', 'a:5:{i:0;s:5:\"admin\";i:1;s:12:\"gerir-socios\";i:2;s:11:\"gerir-assoc\";i:3;s:13:\"gerir-eventos\";i:4;s:19:\"gerir-assoc-specify\";}', 'debaed3ff210a05f1cad34ba5af1f2bf', 2);
 
 --
 -- Índices para tabelas despejadas
@@ -227,7 +231,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de tabela `quotas`
 --
 ALTER TABLE `quotas`
-  MODIFY `idQuota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idQuota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `socios`
