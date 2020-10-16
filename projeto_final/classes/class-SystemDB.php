@@ -1,7 +1,7 @@
 <?php
 
 class SystemDB {
-
+    private static $instance;
     /** DB properties */
     public $host = 'localhost',
             $db_name = '',
@@ -29,6 +29,15 @@ class SystemDB {
 
         // Conecta
         $this->connect();
+    }
+
+    public static function getInstance(){
+        if(!isset(self::$instance)){
+            $dbConnect = 'mysql:host=localhost;dbname='.DB_NAME;
+            self::$instance = new PDO($dbConnect, DB_USER, DB_PASSWORD);
+        }
+        echo 'Ligação estabelecida<br/>';
+        return self::$instance;
     }
 
 // __construct

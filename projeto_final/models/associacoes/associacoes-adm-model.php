@@ -66,7 +66,7 @@ class AssociacoesAdmModel extends ItemsAbstract {
         if (is_numeric(chk_array($this->parametros, 1))) {
             return;
         }
-        print_r($_POST);
+        //print_r($_POST);
         $dados = null;
         foreach ($_POST as $key=>$items){
             if($key == "insere_quota")
@@ -74,7 +74,7 @@ class AssociacoesAdmModel extends ItemsAbstract {
             else
                 $dados[$key] = $items;
         }
-        print_r($dados);
+        //print_r($dados);
         $query = $this->db->insert('quotas', $dados);
 
         if ($query) {

@@ -22,6 +22,6 @@ if($this->logged_in){
         <li><a href="<?echo HOME_URI;?>/evento">Eventos</a></li>
         <li><a href="<?echo HOME_URI;?>/evento/adm">Eventos Adm</a></li>
         <li><a href="<?echo HOME_URI;?>/socio-register">Register socio</a></li>
-        <li><a href="<?echo HOME_URI;?>/perfil/me/<?echo $this->id_soc;?>">Perfil</a></li>
+        <li><a href="<?echo HOME_URI;?>/perfil/me/<? echo $this->id_soc;?>">Perfil</a></li>
     </ul>
 </nav>

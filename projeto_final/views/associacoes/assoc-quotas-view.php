@@ -3,6 +3,8 @@ verifyPath();
 $id_soc = 0;
 if(chk_array($this->parametros, 0))
     $id_soc = chk_array($this->parametros, 0);
+else
+    header('location: '.HOME_URI.'associacoes/adm');
 $adm_uri = HOME_URI.'/associacoes/assocquotas/'.$id_soc.'/';
 $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';

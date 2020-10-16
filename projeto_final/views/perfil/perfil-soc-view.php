@@ -2,9 +2,10 @@
 verifyPath();
 $id_soc = 0;
 //print_r($this->parametros);
-if(chk_array($this->parametros, 0)){
+if(chk_array($this->parametros, 0))
     $id_soc = chk_array($this->parametros, 0);
-}
+else
+    header('location: '.HOME_URI);
 $socio = $modelo->get_soc_by_id($id_soc);
 $adm_uri = HOME_URI.'/perfil/me/'.$id_soc.'/';
 $pagamento_uri = $adm_uri.'pay/';
