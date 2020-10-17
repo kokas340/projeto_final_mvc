@@ -135,13 +135,12 @@ abstract class ItemsAbstract extends MainModel{
         if (is_numeric(chk_array($this->parametros, 1))) {
             return;
         }
-
+        unset($_POST[$this->insere_form()]);
         if($this->haveImage()){
             $imagem = $this->upload_imagem();
             if (!$imagem) {
                 return;
             }
-            unset($_POST[$this->insere_form()]);
             // Insere a imagem em $_POST
             $_POST['imagem'] = $imagem;
         }
@@ -156,7 +155,7 @@ abstract class ItemsAbstract extends MainModel{
 
     public function delete_items($parametros = array()){
         //echo chk_array($this->parametros, 3);
-        if(chk_array($this->parametros, 3) != 'soc' && chk_array($this->parametros, 3) != 'qo')
+        if(chk_array($this->parametros, 3) != 'soc' && chk_array($this->parametros, 3) != 'qo' && chk_array($this->parametros, 3) != 'img')
             $this->delete_items_not_sepecified();
         elseif(chk_array($this->parametros, 3) == 'soc'){
             if(chk_array($this->parametros, 1) != 'del')
@@ -168,7 +167,7 @@ abstract class ItemsAbstract extends MainModel{
             //echo $projeto_id;
             $query = $this->db->delete('socios', 'idSocio', $projeto_id);
             header('location: http://localhost/projeto_final/associacoes/admassoc/'.chk_array($this->parametros, 0));
-        }else{
+        }elseif(chk_array($this->parametros, 3) == 'qo'){
             if(chk_array($this->parametros, 1) != 'del')
                 return;
 
@@ -178,6 +177,16 @@ abstract class ItemsAbstract extends MainModel{
             //echo $projeto_id;
             $query = $this->db->delete('quotas', 'idQuota', $projeto_id);
             header('location: http://localhost/projeto_final/associacoes/assocquotas/'.chk_array($this->parametros, 0));
+        }else{
+            if(chk_array($this->parametros, 1) != 'del')
+                return;
+
+            if(!is_numeric(chk_array($this->parametros, 2)))
+                return;
+            $projeto_id = (int) chk_array($this->parametros, 2);
+            //echo $projeto_id;
+            $query = $this->db->delete('imagem', 'idImagem', $projeto_id);
+            header('location: http://localhost/projeto_final/associacoes/admimages/'.chk_array($this->parametros, 0));
         }
 
     }
@@ -266,9 +275,9 @@ abstract class ItemsAbstract extends MainModel{
     public function upload_imagem(){
         //verifica se o ficheiro da imagem existe
         if(empty($_FILES['projeto_imagem']) && empty($_FILES['imagem'])){
+            echo "ola5";
             return;
         }
-
         //configura os dados da imagem
         $imagem = isset($_FILES['imagem']) ? $_FILES['imagem'] : $_FILES['projeto_imagem'];
         //nome em extenso

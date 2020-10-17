@@ -59,7 +59,6 @@ $delete_uri = $adm_uri.'del/';
                     echo $modelo->form_msg;
                     ?>
                     <input type="submit" value="Save"/>
-                    <a href="<?echo HOME_URI.'/noticias/adm';?>">New Noticias</a>
                 </td>
             </tr>
         </table>
@@ -91,7 +90,7 @@ $delete_uri = $adm_uri.'del/';
                 <td><? echo $noticias['noticia'];?></td>
                 <td>
                     <p>
-                        <img src="<? echo HOME_URI.'views/_uploads/'.$noticias['imagem'];?>" width="30px">
+                        <img src="<?echo HOME_URI.'/views/_uploads/'.$noticias['imagem'];?>" width="30px">
                     </p>
                 </td>
                 <td><?php echo $modelo->get_assoc_by_id($noticias['idAssoc']);?></td>

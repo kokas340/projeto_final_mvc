@@ -6,6 +6,7 @@ $adm_uri = HOME_URI.'/associacoes/adm/';
 $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';
 $admin_assoc_uri = HOME_URI.'/associacoes/admassoc/';
+$admin_images_uri = HOME_URI.'/associacoes/admimages/';
 ?>
 
 <div class="wrap">
@@ -53,7 +54,6 @@ $admin_assoc_uri = HOME_URI.'/associacoes/admassoc/';
                     echo $modelo->form_msg;
                     ?>
                     <input type="submit" value="Save"/>
-                    <a href="<?echo HOME_URI.'/associacoes/adm';?>">New Assoc</a>
                 </td>
             </tr>
         </table>
@@ -80,7 +80,7 @@ $admin_assoc_uri = HOME_URI.'/associacoes/admassoc/';
         <tbody>
         <? foreach($lista as $assoc): ?>
             <tr>
-                <td><a href="<? echo HOME_URI.'/assoc/index/'.$assoc['idAssoc'];?>"><? echo $assoc['idAssoc'];?></a></td>
+                <td><? echo $assoc['idAssoc'];?></td>
                 <td><? echo $assoc['nome'];?></td>
                 <td><? echo $assoc['telefone'];?></td>
                 <td><? echo $assoc['morada'];?></td>
@@ -91,6 +91,8 @@ $admin_assoc_uri = HOME_URI.'/associacoes/admassoc/';
                     <a href="<? echo $delete_uri.$assoc['idAssoc'];?>" >Delete:</a>
                     &nbsp;&nbsp;
                     <a href="<? echo $admin_assoc_uri.$assoc['idAssoc'];?>" >Administrar:</a>
+                    &nbsp;&nbsp;
+                    <a href="<? echo $admin_images_uri.$assoc['idAssoc'];?>" >Adicionar imagem:</a>
                 </td>
             </tr>
         <? endforeach;?>

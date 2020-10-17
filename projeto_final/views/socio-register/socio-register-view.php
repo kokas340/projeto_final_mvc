@@ -48,7 +48,6 @@
             <td colspan="2">
                 <?php echo $modelo->form_msg;?>
                 <input type="submit" value="Save"/>
-                <a href="<?php echo HOME_URI . '/socio-register';?>"New User</a>
             </td>
         </tr>
         </table>

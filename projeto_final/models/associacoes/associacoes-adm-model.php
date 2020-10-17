@@ -67,15 +67,9 @@ class AssociacoesAdmModel extends ItemsAbstract {
             return;
         }
         //print_r($_POST);
-        $dados = null;
-        foreach ($_POST as $key=>$items){
-            if($key == "insere_quota")
-                continue;
-            else
-                $dados[$key] = $items;
-        }
+        unset($_POST['insere_quota']);
         //print_r($dados);
-        $query = $this->db->insert('quotas', $dados);
+        $query = $this->db->insert('quotas', $_POST);
 
         if ($query) {
             $this->form_msg = '<p class="success">Quota atualizada com sucesso!</p>';
@@ -84,9 +78,46 @@ class AssociacoesAdmModel extends ItemsAbstract {
         $this->form_msg = '<p class="error">Erro ao enviar dados!</p>';
     }
 
+    public function inserir_img(){
+        if ('POST' != $_SERVER['REQUEST_METHOD'] || empty($_POST['insere_img'])) {
+            return;
+        }
+        if (chk_array($this->parametros, 0) == 'edit') {
+            return;
+        }
+
+        if (is_numeric(chk_array($this->parametros, 1))) {
+            return;
+        }
+        print_r($_POST);
+        $imagem = $this->upload_imagem();
+        if (!$imagem) {
+            return;
+        }
+        unset($_POST['insere_img']);
+        print_r($_POST);
+        $_POST['titulo'] = $imagem;
+        print_r($_POST);
+        $query = $this->db->insert('imagem', $_POST);
+
+        if ($query) {
+            $this->form_msg = '<p class="success">Imagem atualizada com sucesso!</p>';
+            header('location: '.HOME_URI.'/associacoes/admimages/'.$_POST['idAssoc']);
+            return;
+        }
+        $this->form_msg = '<p class="error">Erro ao enviar dados!</p>';
+    }
+
     public function getQuotas($id = 0){
         if($id!=0){
             $query = $this->db->query('SELECT * FROM quotas WHERE idSocio = '.$id);
+            return $query->fetchAll();
+        }
+    }
+
+    public function get_images_by_id($id = 0){
+        if($id!=0){
+            $query = $this->db->query('SELECT * FROM imagem WHERE idAssoc = '.$id);
             return $query->fetchAll();
         }
     }

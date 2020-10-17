@@ -34,7 +34,6 @@ $modelo->delete_items();
                 echo $modelo->form_msg;
                 ?>
                 <input type="submit" value="Save"/>
-                <a href="<?echo HOME_URI.'/associacoes/adm';?>">New Socio</a>
             </td>
         </tr>
     </table>

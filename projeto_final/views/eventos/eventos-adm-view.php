@@ -44,7 +44,6 @@ $delete_uri = $adm_uri.'del/';
                     echo $modelo->form_msg;
                     ?>
                     <input type="submit" value="Save"/>
-                    <a href="<?echo HOME_URI.'/evento/adm';?>">New Assoc</a>
                 </td>
             </tr>
         </table>
@@ -75,7 +74,7 @@ $delete_uri = $adm_uri.'del/';
                 <td><? echo $evento['evento'];?></td>
                 <td>
                     <p>
-                        <img src="<? echo HOME_URI.'views/_uploads/'.$evento['imagem'];?>" width="30px">
+                        <img src="<?echo HOME_URI.'/views/_uploads/'.$evento['imagem'];?>" width="30px">
                     </p>
                 </td>
                 <td>

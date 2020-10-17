@@ -38,7 +38,6 @@ $modelo->delete_items();
                 echo $modelo->form_msg;
                 ?>
                 <input type="submit" value="Save"/>
-                <a href="<?echo HOME_URI.'/associacoes/assocquotas/'.$id_assoc;?>">New Quota</a>
             </td>
         </tr>
     </table>
