@@ -7,6 +7,7 @@ $edit_uri = $adm_uri.'edit/';
 $delete_uri = $adm_uri.'del/';
 $admin_assoc_uri = HOME_URI.'/associacoes/admassoc/';
 $admin_images_uri = HOME_URI.'/associacoes/admimages/';
+$admin_assoc_eventos = HOME_URI.'/associacoes/eventosassoc/';
 ?>
 
 <div class="wrap">
@@ -65,7 +66,7 @@ $admin_images_uri = HOME_URI.'/associacoes/admimages/';
     <?
     $lista = $modelo->listar_items();
     ?>
-    <h1>Lista de Projetos</h1>
+    <h1>Lista de Associações</h1>
     <table id="tbl-projeto" class="list-table">
         <thead>
         <tr>
@@ -93,6 +94,8 @@ $admin_images_uri = HOME_URI.'/associacoes/admimages/';
                     <a href="<? echo $admin_assoc_uri.$assoc['idAssoc'];?>" >Administrar:</a>
                     &nbsp;&nbsp;
                     <a href="<? echo $admin_images_uri.$assoc['idAssoc'];?>" >Adicionar imagem:</a>
+                    &nbsp;&nbsp;
+                    <a href="<? echo $admin_assoc_eventos.$assoc['idAssoc'];?>" >Eventos:</a>
                 </td>
             </tr>
         <? endforeach;?>

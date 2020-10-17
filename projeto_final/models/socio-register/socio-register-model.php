@@ -275,5 +275,42 @@
             }
         }
 
+        public function listar_eventos($parametros = array()){
+            // Configura as variáveis que vamos utilizar
+            $id = $where = $query_limit = null;
+
+            // Verifica se um parâmetro foi enviado para carregar uma notícia
+            if (is_numeric(chk_array($parametros, 0))) {
+
+                // Configura o ID para enviar para a consulta
+                $id = array(chk_array($parametros, 0));
+
+                // Configura a cláusula where da consulta
+                $where = " WHERE a.idAssoc = ? ";
+            }
+
+            // Configura a página a ser exibida
+            $pagina = !empty($parametros[1]) ? $parametros[1] : 1;
+
+            // A páginação inicia do 0
+            $pagina--;
+
+            // Configura o número de posts por página
+            $posts_por_pagina = $this->posts_por_pagina;
+
+            // O offset dos posts da consulta
+            $offset = $pagina * $posts_por_pagina;
+            if (empty($this->sem_limite)) {
+
+                // Configura o limite da consulta
+                $query_limit = " LIMIT $offset,$posts_por_pagina ";
+            }
+            /*$query = $this->db->query('SELECT a.idAssoc, e.idAssoc, e.idEvento, k.idEvento, k.titulo, k.evento, k.imagem, s.idSocio, i.idEvento, i.idSocio FROM associacao a INNER JOIN associaeventos e ON a.idAssoc = e.idAssoc INNER JOIN eventos k ON e.idEvento = k.idEvento INNER JOIN socios s ON s.idSocio = i.idSocio INNER JOIN inscricao i ON i.idEvento = k.idEvento '.$where.' ORDER BY a.idAssoc DESC '.$query_limit, $id);*/
+            $query = $this->db->query('SELECT a.idAssoc, e.idAssoc, e.idEvento, k.idEvento, k.titulo, k.evento, k.imagem, s.idAssoc, i.idEvento, i.idSocio FROM socios s INNER JOIN associacao a ON s.idAssoc = a.idAssoc INNER JOIN associaeventos e ON a.idAssoc = e.idAssoc INNER JOIN eventos k ON e.idEvento = k.idEvento INNER JOIN inscricao i ON k.idEvento = i.idEvento' . $where . ' ORDER BY s.idAssoc DESC ' . $query_limit, $id);
+
+            // Retorna
+            return $query->fetchAll();
+        }
+
     }
 ?>

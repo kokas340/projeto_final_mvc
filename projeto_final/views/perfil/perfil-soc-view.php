@@ -49,3 +49,35 @@ $modelo->pay($this->parametros);
         </tbody>
     </table>
 </div>
+<div class="wrap">
+    <?
+    $lista = $modelo->getQuotas($id_soc);
+    $lista_even = $modelo->listar_eventos($this->parametros);
+    print_r($lista_even);
+    ?>
+    <h1>Lista de Eventos:</h1>
+    <table id="tbl-projeto" class="list-table">
+        <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Evento</th>
+            <th>Imagem</th>
+        </tr>
+        </thead>
+        <tbody>
+        <? foreach($lista as $quotas): ?>
+            <?if($quotas['pago'] == 0):?>
+                <tr>
+                    <td><? echo $quotas['preco'];?></td>
+                    <td><? echo $quotas['dataComeco'];?></td>
+                    <td><? echo $quotas['dataTermino'];?></td>
+                    <td>
+                        <a href="<? echo $pagamento_uri.$quotas['idQuota']?>" >Pagar:</a>
+                    </td>
+                </tr>
+            <? endif;?>
+        <? endforeach;?>
+        </tbody>
+    </table>
+</div>
+

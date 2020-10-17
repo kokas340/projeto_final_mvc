@@ -121,6 +121,7 @@ abstract class ItemsAbstract extends MainModel{
         }
 
         $query = $this->db->query('SELECT * FROM '.$this->table_name().' ' . $where . ' ORDER BY '.$this->id_table().' DESC' . $query_limit, $id);
+        //print_r($query->fetchAll());
         return $query->fetchAll();
     }
 
@@ -155,7 +156,7 @@ abstract class ItemsAbstract extends MainModel{
 
     public function delete_items($parametros = array()){
         //echo chk_array($this->parametros, 3);
-        if(chk_array($this->parametros, 3) != 'soc' && chk_array($this->parametros, 3) != 'qo' && chk_array($this->parametros, 3) != 'img')
+        if(chk_array($this->parametros, 3) != 'soc' && chk_array($this->parametros, 3) != 'qo' && chk_array($this->parametros, 3) != 'img' && chk_array($this->parametros, 4) != 'ev')
             $this->delete_items_not_sepecified();
         elseif(chk_array($this->parametros, 3) == 'soc'){
             if(chk_array($this->parametros, 1) != 'del')
@@ -177,7 +178,7 @@ abstract class ItemsAbstract extends MainModel{
             //echo $projeto_id;
             $query = $this->db->delete('quotas', 'idQuota', $projeto_id);
             header('location: http://localhost/projeto_final/associacoes/assocquotas/'.chk_array($this->parametros, 0));
-        }else{
+        }elseif(chk_array($this->parametros, 3) == 'img'){
             if(chk_array($this->parametros, 1) != 'del')
                 return;
 
@@ -187,6 +188,15 @@ abstract class ItemsAbstract extends MainModel{
             //echo $projeto_id;
             $query = $this->db->delete('imagem', 'idImagem', $projeto_id);
             header('location: http://localhost/projeto_final/associacoes/admimages/'.chk_array($this->parametros, 0));
+        }else{
+            if(chk_array($this->parametros, 1) != 'del')
+                return;
+
+            if(!is_numeric(chk_array($this->parametros, 3)) && is_numeric(chk_array($this->parametros, 2)))
+                return;
+            $projeto_id = (int) chk_array($this->parametros, 3);
+            $query = $this->db->query('DELETE FROM associaeventos WHERE idEvento = '.chk_array($this->parametros, 2).' AND idAssoc = '.chk_array($this->parametros, 3));
+            //header('location: http://localhost/projeto_final/associacoes/eventosassoc/'.chk_array($this->parametros, 0));
         }
 
     }

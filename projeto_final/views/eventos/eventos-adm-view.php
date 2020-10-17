@@ -39,6 +39,19 @@ $delete_uri = $adm_uri.'del/';
                 </td>
             </tr>
             <tr>
+                <td>
+                    <label for="idAssoc">Escolhe a associação:</label>
+                    <select name="idAssoc" id="idAssoc">
+                        <?
+                        $list_assoc = $modelo->get_assoc();
+                        foreach ($list_assoc as $item):
+                            ?>
+                            <option name ="idAssocItem" value="<? echo htmlentities($item['idAssoc']); ?>"><? echo htmlentities($item['nome']); ?></option>
+                        <? endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     <?
                     echo $modelo->form_msg;

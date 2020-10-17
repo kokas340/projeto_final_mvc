@@ -1,7 +1,7 @@
 <?php
 class PerfilController extends MainController{
     public $login_required = true;
-    public $permissions_required = 'gerir-socios';
+    public $permissions_required = 'perfil';
 
 
     public function me(){
